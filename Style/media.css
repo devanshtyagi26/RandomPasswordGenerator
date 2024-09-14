@@ -2,11 +2,12 @@
   body {
     background-size: cover;
   }
-.hero {
+  .hero {
     width: 70%;
     font-size: 1rem;
-}
+  }
   .container {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    transform: scale(0.9);
   }
 }

@@ -53,12 +53,18 @@ body {
   background-color: rgb(255, 255, 255);
   border: 1px solid black;
   color: black;
-  font-size: 1.8rem;
   padding: 1rem;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.container .displayPassword .password {
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  width: 100%;
 }
 .container .displayPassword button {
   background: none;

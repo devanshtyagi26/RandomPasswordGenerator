@@ -10,7 +10,7 @@ class GeneratePassword {
   #upperset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   #lowerset = "abcdefghijklmnopqrstuvwxyz";
   #numset = "1234567890";
-  #specialset = "!@#$%^&";
+  #specialset = `"!\#$"%&'()*+,-./:;<=>?@[\\]^_{|}~`;
 
   build() {
     let choiceSet = "";
@@ -46,7 +46,7 @@ function processForm() {
   const special = document.querySelector("#special");
   const length = document.querySelector("#length").value;
   if (length > 15) {
-    document.querySelector(".password").innerHTML = "";
+    document.querySelector(".password").value = "";
     alertify.set("notifier", "position", "top-right");
     alertify.error("Length is greater than 15 chars"); // Error callback
     return;
@@ -75,6 +75,12 @@ function processForm() {
   } else {
     isspecial = 0;
   }
+  if (isupper + islower + isnumber + isspecial == 0) {
+    document.querySelector(".password").value = "";
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Give Valid Input"); // Error callback
+    return;
+  }
 
   let password = new GeneratePassword(
     length,
@@ -84,20 +90,46 @@ function processForm() {
     isspecial
   );
   console.log(password.build());
-  document.querySelector(".password").innerHTML = password.build();
+  document.querySelector(".password").value = password.build();
 }
 // let text = document.querySelector(".password").innerHTML;
-function copyToClipboard() {
-  const text = document.querySelector(".password").innerHTML; // The text you want to copy
 
-  navigator.clipboard
-    .writeText(text)
-    .then(function () {
-      alertify.set("notifier", "position", "top-right");
-      alertify.success("Password Copied Successfully");
-    })
-    .catch(function (error) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.error("Failed to Copy"); // Error callback
-    });
+function copyToClipboard() {
+  var input = document.querySelector(".password");
+
+  // Select the text from the input
+  var password = input.value || input.textContent; // Use .value for input elements, .textContent for others
+
+  if (navigator.clipboard) {
+    // Modern approach using Clipboard API
+    navigator.clipboard
+      .writeText(password)
+      .then(function () {
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Password Copied Successfully");
+      })
+      .catch(function (err) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Failed to Copy"); // Error callback
+      });
+  } else {
+    // Fallback for older browsers
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+      input.contenteditable = true;
+      input.readonly = false;
+
+      var range = document.createRange();
+      range.selectNodeContents(input);
+
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      input.setSelectionRange(0, 999999);
+    } else {
+      input.select();
+    }
+    document.execCommand("copy");
+    alertify.set("notifier", "position", "top-right");
+    alertify.success("Password Copied Successfully");
+  }
 }
