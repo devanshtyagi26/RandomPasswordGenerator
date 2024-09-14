@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>God Password Generator</title>
+    <link rel="stylesheet" href="Style/style.css" />
+    <link rel="stylesheet" href="Style/media.css" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="hero">
+      Welcome! Set up to 15 characters, pick options, and click 'Generate' for a
+      secure password.
+    </div>
+    <div class="container">
+      <div class="displayPassword">
+        <div class="password"></div>
+        <button class="btn" onclick="copyToClipboard()">
+          <img src="Images/copy.svg" alt="copy" srcset="" />
+        </button>
+      </div>
+      <form method="post" action="#" onsubmit="processForm();return false">
+        <table>
+          <tr>
+            <td id="text">
+              <label for="length">Enter length of Password: </label><br />
+            </td>
+            <td>
+              <label class="custom-checkbox">
+                <input type="number" name="length" id="length" required />
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td id="text">
+              <label for="upper"> Contains Upper Case</label><br />
+            </td>
+            <td>
+              <label class="custom-checkbox">
+                <input name="dummy" type="checkbox" id="upper" />
+                <span class="checkmark"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td id="text">
+              <label for="lower"> Contains Lower Case</label><br />
+            </td>
+            <td>
+              <label class="custom-checkbox">
+                <input name="dummy" type="checkbox" id="lower" />
+                <span class="checkmark"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td id="text">
+              <label for="number"> Contains Numbers </label><br />
+            </td>
+            <td>
+              <label class="custom-checkbox">
+                <input name="dummy" type="checkbox" id="number" />
+                <span class="checkmark"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td id="text">
+              <label for="special"> Contains Special Characters </label><br />
+            </td>
+            <td>
+              <label class="custom-checkbox">
+                <input name="dummy" type="checkbox" id="special" />
+                <span class="checkmark"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <button type="submit" name="submit" id="submit">Generate</button>
+      </form>
+    </div>
+  </body>
+  <script src="Javascript/script.js"></script>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+</html>
